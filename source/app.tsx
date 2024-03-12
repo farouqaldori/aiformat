@@ -3,7 +3,6 @@ import { Box, Text, useInput } from 'ink';
 import fs from 'fs';
 import path from 'path';
 import clipboard from 'clipboardy';
-import chalk from 'chalk';
 import figures from 'figures';
 
 const App: FC = () => {
@@ -104,14 +103,14 @@ const App: FC = () => {
 			</Box>
 			<Box marginBottom={1} flexDirection="column">
 				{items.map((item, index) => (
-					<Text key={item} color={index === currentIndex ? 'cyan' : undefined}>
-						{selectedItems.includes(index) ? chalk.cyan(`[${figures.tick}]`) : `[ ]`} {item}
+					<Text key={item} color={index === currentIndex ? 'green' : selectedItems.includes(index) ? 'cyan' : undefined}>
+						{selectedItems.includes(index) ? `[${figures.tick}] ${item}` : `[ ] ${item}`}
 					</Text>
 				))}
 				{items.length === 0 && <Text color="gray" italic>No directories/files matching search.</Text>}
 			</Box>
 			<Box>
-				<Text>Use arrow keys to navigate, left/right to select, and Enter to proceed</Text>
+				<Text>Use <Text color="green">Up</Text> / <Text color="green">Down</Text> to navigate, <Text color="green">Left</Text> / <Text color="green">Right</Text> to select, and <Text color="green">Enter</Text> to proceed.</Text>
 			</Box>
 		</Box>
 	);
