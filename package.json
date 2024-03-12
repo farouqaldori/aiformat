@@ -1,11 +1,15 @@
 {
-	"name": "wizcli",
+	"name": "aiformat",
 	"version": "0.0.1",
 	"license": "MIT",
 	"bin": "dist/cli.js",
 	"type": "module",
 	"engines": {
 		"node": ">=16"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/farouqaldori/aiformat.git"
 	},
 	"scripts": {
 		"build": "tsc",

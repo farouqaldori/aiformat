@@ -8,13 +8,13 @@ import App from './app.js';
 // const cli = meow(
 //     `
 // 	Usage
-// 	  $ wizcli
+// 	  $ aiformat
 
 // 	Options
 // 		--name  Your name
 
 // 	Examples
-// 	  $ wizcli --name=Jane
+// 	  $ aiformat --name=Jane
 // 	  Hello, Jane
 // `,
 //     {
