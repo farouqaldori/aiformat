@@ -46,7 +46,7 @@ $ cd /path/to/your/project
 $ aiformat
 ```
 
-![aiformat example](https://i.imgur.com/O0LAyeH.png)
+![aiformat example](https://i.imgur.com/JYHTi6y.png)
 
 Navigate through the list, select the desired files and folders, and press Enter. The formatted output will be copied to your clipboard, ready to be pasted into your conversation with your AI assistant.
 
