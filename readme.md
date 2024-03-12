@@ -1,5 +1,7 @@
 # aiformat
 
+https://github.com/farouqaldori/aiformat/assets/16778033/381c5736-e9a1-4dc0-afeb-31e06c7d8bb8
+
 aiformat is a simple tool you can use from the command line. It helps you select files and folders and change them into a format that AI assistants like Claude can understand. 
 
 This way, you can share code snippets and project structures faster and easier directly from the console, without having to copy and paste them manually.
