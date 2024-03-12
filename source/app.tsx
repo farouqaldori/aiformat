@@ -11,6 +11,7 @@ const App: FC = () => {
 	const [selectedItems, setSelectedItems] = useState<number[]>([]);
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [excludedFolders] = useState<string[]>(['node_modules', '.git']);
+	const [message, setMessage] = useState<string>('');
 
 	useEffect(() => {
 		const currentDir = process.cwd();
@@ -35,9 +36,12 @@ const App: FC = () => {
 		}
 
 		if (key.return) {
-			const output = getFilesAndFolders(selectedItems);
+			const { output, fileCount } = getFilesAndFolders(selectedItems);
 			clipboard.writeSync(output);
-			process.exit();
+			setMessage(`✨ ${fileCount} file${fileCount !== 1 ? 's' : ''} added to your clipboard ✨`);
+			setTimeout(() => {
+				process.exit();
+			}, 100);
 		}
 		if (key.upArrow) {
 			setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : items.length - 1));
@@ -61,38 +65,48 @@ const App: FC = () => {
 
 	const getFilesAndFolders = (selectedItems: number[]) => {
 		const outputItems: string[] = [];
+		let fileCount = 0;
+
 		for (const index of selectedItems) {
 			const item = items[index];
 			if (item) {
 				const itemPath = path.join(process.cwd(), item);
 				if (fs.statSync(itemPath).isDirectory()) {
 					outputItems.push(`<directory name="${item}">\n`);
-					const files = getFilesInDirectory(itemPath);
+					const { files, count } = getFilesInDirectory(itemPath);
 					outputItems.push(...files);
 					outputItems.push(`</directory>\n`);
+					fileCount += count;
 				} else {
 					const content = fs.readFileSync(itemPath, 'utf8');
 					outputItems.push(`<file name="${item}">\n${content}\n</file>\n`);
+					fileCount++;
 				}
 			}
 		}
-		return outputItems.join('\n');
+
+		return { output: outputItems.join('\n'), fileCount };
 	};
 
 	const getFilesInDirectory = (dirPath: string) => {
 		const files: string[] = [];
+		let fileCount = 0;
+
 		const dirItems = fs.readdirSync(dirPath);
 		for (const item of dirItems) {
 			const itemPath = path.join(dirPath, item);
 			if (fs.statSync(itemPath).isDirectory()) {
-				const nestedFiles = getFilesInDirectory(itemPath);
+				const { files: nestedFiles, count } = getFilesInDirectory(itemPath);
 				files.push(...nestedFiles);
+				fileCount += count;
 			} else {
 				const content = fs.readFileSync(itemPath, 'utf8');
 				files.push(`<file name="${itemPath}">\n${content}\n</file>\n`);
+				fileCount++;
 			}
 		}
-		return files;
+
+		return { files, count: fileCount };
 	};
 
 	return (
@@ -112,6 +126,11 @@ const App: FC = () => {
 			<Box>
 				<Text>Use <Text color="green">Up</Text> / <Text color="green">Down</Text> to navigate, <Text color="green">Left</Text> / <Text color="green">Right</Text> to select, and <Text color="green">Enter</Text> to proceed.</Text>
 			</Box>
+			{message && (
+				<Box marginTop={2}>
+					<Text color="green">{message}</Text>
+				</Box>
+			)}
 		</Box>
 	);
 };
