@@ -6,6 +6,13 @@ This way, you can share code snippets and project structures faster and easier d
 
 This cli tool is built using [Ink](https://github.com/vadimdemedes/ink).
 
+## Updates
+### **Mar 18 2024 (v0.0.3):**  Folder navigation support
+* Added searching inside deeply nested files.
+* Added the ability to expand/collapse folders with the `Tab` key.
+* Added emojis to differentiate between folders (🗂️) and files (📄).
+* Full code re-write, including ID based navigation.
+
 ## Features
 
 - Interactively select files and folders from the current directory
@@ -46,7 +53,7 @@ $ cd /path/to/your/project
 $ aiformat
 ```
 
-![aiformat example](https://i.imgur.com/JYHTi6y.png)
+![aiformat example](https://i.imgur.com/Vx1EYLn.png)
 
 Navigate through the list, select the desired files and folders, and press Enter. The formatted output will be copied to your clipboard, ready to be pasted into your conversation with your AI assistant.
 
