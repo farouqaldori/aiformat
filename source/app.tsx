@@ -60,7 +60,7 @@ const App: FC = () => {
 		const files = outputXml(selectedItems);
 		clipboard.writeSync(files.content);
 		setMessage(
-			<Text color="white">✨ Successfully copied <Text color="cyan">{files.fileCount}</Text> files to clipboard</Text>
+			<Text color="white">✨ Successfully copied <Text color="cyan">{files.fileCount}</Text> file{files.fileCount > 1 && "s"} to clipboard</Text>
 		);
 		setTimeout(() => {
 			process.exit(0);

@@ -47,8 +47,16 @@ export const outputXml = (fileTree: FileOrFolder[]): {
         }
     }
 
+    function countFiles(node: FileOrFolder): number {
+        if (node.isDirectory) {
+            return node.children.reduce((acc, child) => acc + countFiles(child), 0);
+        } else {
+            return 1;
+        }
+    }
+
     return {
         content: cleanedFileTree.map(node => generateXml(node)).join('\n\n'),
-        fileCount: cleanedFileTree.filter(node => !node.isDirectory).length,
+        fileCount: cleanedFileTree.reduce((acc, node) => acc + countFiles(node), 0),
     };
 };
