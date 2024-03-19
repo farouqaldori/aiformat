@@ -9,7 +9,7 @@ This way, you can share code snippets and project structures faster and easier d
 This cli tool is built using [Ink](https://github.com/vadimdemedes/ink).
 
 ## Updates
-### **Mar 18 2024 (v0.0.3):**  Folder navigation support
+### **Mar 18 2024:**  Folder navigation support
 * Added searching inside deeply nested files.
 * Added the ability to expand/collapse folders with the `Tab` key.
 * Added emojis to differentiate between folders (🗂️) and files (📄).
